@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Lora } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "optional" });
+// The extended subset supplies ₹ in the product preview. Preload the same font
+// file rather than discovering it after CSS loads; rendering stays unchanged.
+const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist", display: "optional" });
 const lora = Lora({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {

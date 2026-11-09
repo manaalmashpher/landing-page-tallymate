@@ -12,9 +12,9 @@ This follows the assignment: establish relevance, make the problem recognisable,
 
 ## Visual direction
 
-Light, calm, product-led B2B design. Geist typography, a deep green accent, sage surfaces, restrained borders, and varied layouts. The design stays light in accordance with the agreed plan. Consistent radii: 16px panels, 8px buttons, smaller internal product elements. Motion intensity is 3: interaction feedback rather than automatic animation. Design variance is 5 and visual density is 4. Layers: header 20, mobile navigation 30, skip link 40.
+Light, calm, product-led B2B design. Lora display headings pair with Geist interface and body text. The hero headline uses weight 650 on mobile and desktop. Deep green, sage surfaces, amber primary actions, restrained borders, and rounded panels carry the visual language. The hero has a slowly drifting light green-to-amber background. Motion intensity is 5, design variance is 5, and visual density is 4. Hero entrances, section reveals, and preview transitions honor reduced-motion preferences. Layers: header 20, mobile navigation 30, skip link 40.
 
-Product previews are functioning React component illustrations with selectable views and wholly fictional data. They are not screenshots of the live app and are labelled accordingly. Mobile uses a compact view with readable figures and horizontal view controls; the desktop chart is omitted on narrow screens. The page does not copy confidential reference screenshots. The wordmark is a typographic assignment treatment; replace with an approved asset before a real brand launch.
+Product previews are functioning React component illustrations with wholly fictional data, not screenshots of the live app. Sales, Cash & bank, and Stock have the same metrics and attention panels on mobile and desktop; Ask your books scrolls to the example questions on both. Desktop retains the tilted panel. Views cycle every five seconds until a visitor selects or focuses a tab. Automatic cycling pauses in hidden browser tabs and is disabled for reduced motion. Switching views uses a 650 ms eased fade. The page borrows the real product structure without copying its figures or exact appearance. The wordmark is a typographic assignment treatment; replace with an approved asset before a real brand launch.
 
 Below-fold sections use content-visibility to defer layout. Only Tailwind's theme and utility layers are imported; the page has explicit CSS resets. The self-hosted Geist font uses optional display to avoid a late font swap on slow connections.
 
@@ -33,8 +33,8 @@ Below-fold sections use content-visibility to defer layout. Only Tailwind's them
 
 ## Outstanding before submission / real launch
 
-- Live preview: https://landing-page-tallymate.vercel.app/ (updated after correcting the connected GitHub repository). Publish the latest local canonical metadata changes through Vercel.
-- Deployed Lighthouse performance target achieved on 9 November 2026: 99 mobile and 100 desktop. Report links and conditions are recorded below.
+- Live preview: https://landing-page-tallymate.vercel.app/. The current deployed URL was audited on 10 November 2026; reports are linked below.
+- Latest deployed Lighthouse performance: 97 mobile and 100 desktop on 10 November 2026. Report links, conditions, and remaining findings are recorded below.
 - Confirm the enquiry contact with the lead and replace email drafts with an approved scheduler or lead endpoint if requested.
 - Obtain an approved customer story if available; otherwise retain the explicit placeholder.
 - Confirm supported TallyPrime versions, access roles, processing location, retention/deletion terms, and final legal documents before stronger claims or onboarding.
@@ -44,7 +44,7 @@ Below-fold sections use content-visibility to defer layout. Only Tailwind's them
 
 Codex assisted with reading and interpreting the assignment and product references, the implementation plan, copy, visual design, Next.js/React implementation, and verification. Product examples and charts are fictional. No real customer testimonials, confidential business records, or private screenshots were generated or published.
 
-## Verification results
+## Historical local verification results (9 November 2026)
 
 Local production build verified on 9 November 2026. These are local measurements, not deployed guarantees.
 
@@ -72,29 +72,31 @@ Audits used Lighthouse 13.6.0 with default simulated mobile throttling and the d
 
 Performance fixes were driven by failed audit runs: contrast corrections, deferred offscreen layout, leaner styling resets, optional font display, and a compact mobile product composition. Section navigation uses immediate scrolling to keep targets stable. Run fresh audits on the hosted URL and repeat the complete keyboard walkthrough before submission.
 
-The assignment preview is live at https://landing-page-tallymate.vercel.app/; the domain was updated after correcting the connected GitHub repository. Vercel configuration is prepared in `vercel.json`, with Node.js 22.x declared in `package.json`. The latest local configuration and canonical metadata changes still need to be published. A complete deployed interaction review remains pending.
+The assignment preview is live at https://landing-page-tallymate.vercel.app/; the domain was updated after correcting the connected GitHub repository. Vercel configuration is prepared in `vercel.json`, with Node.js 22.x declared in `package.json`. The current deployed audit is recorded below. A complete deployed interaction review remains pending.
 
 ## Deployed Lighthouse results
 
-Historical audit: these results and report links refer to the previous deployment, `https://tallymate-landing-page.vercel.app/`, not the newly connected production domain. Google PageSpeed Insights audited that URL on 9 November 2026 at 19:42 IST using Lighthouse 13.6.0. Mobile used an emulated Moto G Power with Slow 4G throttling; desktop used emulated Desktop with custom throttling. These are single initial-page-load lab measurements and may vary. PageSpeed Insights has no real-user field data for this site yet.
+Google PageSpeed Insights audited the current deployment, `https://landing-page-tallymate.vercel.app/`, on 10 November 2026 at 01:38 IST using Lighthouse 13.6.0. Mobile used an emulated Moto G Power with Slow 4G throttling; desktop used emulated Desktop with custom throttling. These are single initial-page-load lab measurements and may vary. No real-user field data was available.
 
 | Check | Mobile | Desktop |
 | --- | --- | --- |
-| Performance | 99 | 100 |
-| Accessibility | 100 | 100 |
+| Performance | 97 | 100 |
+| Accessibility | 98 | 98 |
 | Best Practices | 100 | 100 |
-| SEO | 60 | 60 |
+| SEO | 63 | 63 |
 | First Contentful Paint | 0.9 s | 0.3 s |
 | Largest Contentful Paint | 0.9 s | 0.3 s |
-| Total Blocking Time | 30 ms | 60 ms |
+| Total Blocking Time | 40 ms | 40 ms |
 | Cumulative Layout Shift | 0 | 0 |
-| Speed Index | 3.6 s | 0.4 s |
+| Speed Index | 4.5 s | 0.5 s |
 
-Reports: [mobile](https://pagespeed.web.dev/analysis/https-tallymate-landing-page-vercel-app/uml3lzq389?form_factor=mobile) and [desktop](https://pagespeed.web.dev/analysis/https-tallymate-landing-page-vercel-app/uml3lzq389?form_factor=desktop). SEO reports the expected indexing block from intentional `noindex` metadata. Remaining optimisation suggestions include unused JavaScript (55 KiB) and legacy JavaScript (14 KiB); mobile also reports an estimated 110 ms of render-blocking savings. The deployed performance requirement of 90+ is met on both form factors. Local scores were 92 mobile and 100 desktop, but the environments differ, so this is not a controlled before/after comparison.
+Current reports: [mobile](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=mobile) and [desktop](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=desktop). These replace the previous deployment's PageSpeed report links.
 
-Raw Lighthouse HTML and JSON were not exported from PageSpeed Insights; the hosted report links above provide the audit results.
+The 90+ performance target is met in both runs. SEO is reduced by intentional `noindex, nofollow` metadata. Accessibility flags a skipped heading level in the hero product preview: its H3 follows the page H1 without an intervening H2. Remaining performance suggestions include unused JavaScript (53 KiB mobile, 55 KiB desktop), legacy JavaScript (14 KiB), forced reflow, and one long main-thread task. Mobile reports an estimated 120 ms of render-blocking savings. Mobile Speed Index is 4.5 s despite a 0.9 s LCP; these metrics describe different aspects of rendering.
 
-## User-run Lighthouse CLI reports
+Raw Lighthouse HTML and JSON were not exported from PageSpeed Insights; the hosted report links above provide the audit results. The historical local and user-run CLI measurements in this document refer to a different build or URL and are not a controlled before/after comparison with this audit.
+
+## Historical user-run Lighthouse CLI reports (9 November 2026)
 
 Two further audits of the previous deployment URL (`https://tallymate-landing-page.vercel.app/`) were run on 9 November 2026 using Lighthouse 13.6.0 through the CLI, with simulated throttling. These are separate measurements from PageSpeed Insights.
 
@@ -114,4 +116,4 @@ Saved HTML reports: [mobile](./tallymate-landing-page.vercel.app_2026-11-09_19-5
 
 Mobile emulated a Moto G Power at 412 × 823 CSS pixels, with 4× CPU slowdown and 150 ms simulated network RTT. Desktop used 1350 × 940 CSS pixels, no CPU slowdown, and 40 ms simulated network RTT. Both used an initial navigation with storage reset enabled.
 
-The mobile CLI result does not meet the 90+ performance target, despite the earlier PageSpeed Insights score of 99. Its main measured difference is higher Total Blocking Time (1,120 ms versus 30 ms). The cause has not been established; differences in the host environment and run conditions mean these scores should not be treated as a controlled regression comparison. Desktop still meets the target. SEO remains 60 because indexing is intentionally blocked. Retain both sets of results; investigate the mobile blocking time before claiming consistently reproducible 90+ mobile performance.
+This historical mobile CLI run did not meet the 90+ performance target; its Total Blocking Time was 1,120 ms. The desktop CLI run met the target, and both SEO scores were 60 because indexing was intentionally blocked. The cause of the high mobile blocking time was not established. These runs used a previous deployment and different conditions from the current PageSpeed audit above, so they are not a controlled regression comparison. Retain these historical CLI measurements for context; do not substitute them for the current deployed audit or claim consistently reproducible performance from a single run.
