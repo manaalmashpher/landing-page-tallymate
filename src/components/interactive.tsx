@@ -1,53 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRightIcon, ArrowUpRightIcon, ChartBarIcon, CheckIcon, ChatCircleDotsIcon, CircleNotchIcon, CubeIcon, ListIcon, WalletIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon, ArrowUpRightIcon, CheckIcon, ChatCircleDotsIcon, CircleNotchIcon, ListIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
   return <div className="mobile-menu" onKeyDown={event => { if (event.key === "Escape") { setOpen(false); event.currentTarget.querySelector('button')?.focus(); } }}><button className="icon-button" aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open} aria-controls="mobile-links" onClick={() => setOpen(!open)}>{open ? <XIcon size={24} /> : <ListIcon size={24} />}</button>{open && <nav id="mobile-links" aria-label="Mobile navigation"><a href="#what-you-see" onClick={() => setOpen(false)}>What you’ll see</a><a href="#how-it-works" onClick={() => setOpen(false)}>How it works</a><a href="#questions" onClick={() => setOpen(false)}>Try an example</a><a href="#faq" onClick={() => setOpen(false)}>FAQs</a><a href="#book-demo" className="button button-primary" onClick={() => setOpen(false)}>Book a demo <ArrowUpRightIcon size={17} /></a></nav>}</div>;
-}
-
-const views = {
-  overview: {
-    label: "Overview", title: "Your business at a glance", primary: "Sales this month", amount: "₹24,86,400", description: "₹3,12,800 more than last month", metric: "Customers owe you", value: "₹8,42,600", secondMetric: "Bills to pay this week", secondValue: "₹3,18,200", chart: "Sales this week", bars: [38, 64, 49, 79, 58, 92, 72], insight: "₹2.14 lakh is waiting on 3 overdue customers.", action: "See who to follow up with", icon: ChartBarIcon,
-  },
-  cash: {
-    label: "Cash & bank", title: "Know where your money stands", primary: "Cash and bank", amount: "₹6,74,800", description: "Based on the latest books received", metric: "Expected this week", value: "₹2,46,500", secondMetric: "Bills to pay this week", secondValue: "₹3,18,200", chart: "Money collected this week", bars: [68, 41, 82, 49, 74, 59, 90], insight: "Collect the overdue bills before your next supplier payment.", action: "Explore the cash example", icon: WalletIcon,
-  },
-  stock: {
-    label: "Stock", title: "See what is moving. And what isn’t.", primary: "Stock on your shelves", amount: "₹12,38,500", description: "Across 84 items in your books", metric: "Unsold for 90+ days", value: "₹2,76,400", secondMetric: "Items to reorder", secondValue: "4 items", chart: "Items sold this week", bars: [42, 76, 54, 88, 65, 51, 80], insight: "₹2.76 lakh is tied up in stock held for over 90 days.", action: "Explore the stock example", icon: CubeIcon,
-  },
-};
-type View = keyof typeof views;
-
-export function ProductPreview() {
-  const [view, setView] = useState<View>("overview");
-  const data = views[view];
-  return <div className="product-stage">
-    <div className="product-window" aria-label="Interactive product illustration using fictional data">
-      <div className="product-topbar"><span className="product-wordmark">tallymate<span>.</span></span><span className="sample-label">Illustrative data</span><span className="company-avatar" aria-label="Example company">MT</span></div>
-      <div className="product-body">
-        <div className="product-sidebar" role="group" aria-label="Explore product views">
-          {(Object.keys(views) as View[]).map(key => { const Icon = views[key].icon; return <button key={key} title={views[key].label} aria-pressed={view === key} onClick={() => setView(key)}><Icon size={19} weight={view === key ? "fill" : "regular"} /><span>{views[key].label}</span></button>; })}
-          <a href="#questions" title="Ask a question"><ChatCircleDotsIcon size={19} /><span>Ask your books</span></a>
-          <span className="sidebar-bottom"><CheckIcon size={15} /> Read-only</span>
-        </div>
-        <div className="product-content" aria-live="polite" aria-atomic="true"><div key={view} className="product-view-transition">
-          <div className="product-greeting"><span>Malabar Trading Co.</span><span className="product-date">October overview</span></div>
-          <p className="product-title">{data.title}</p>
-          <div className="product-metric"><span>{data.primary}</span><strong>{data.amount}</strong><small><ArrowUpRightIcon size={13} />{data.description}</small></div>
-          <div className="product-small-metrics"><div><span>{data.metric}</span><strong>{data.value}</strong></div><div><span>{data.secondMetric}</span><strong>{data.secondValue}</strong></div></div>
-          <div className="product-chart"><div><span>{data.chart}</span></div><div className="bar-chart" role="img" aria-label={`${data.chart}, illustrative seven-day comparison`}>
-            {data.bars.map((height, i) => <div className="bar-column" key={i}><span className="chart-bar" style={{ height: `${height}%` }} /><span className="bar-day">{["M", "T", "W", "T", "F", "S", "S"][i]}</span></div>)}
-          </div></div>
-          <div className="product-attention"><div><strong>Worth your attention</strong><p>{data.insight}</p><a href="#questions">{data.action} <ArrowRightIcon size={12} /></a></div></div></div>
-        </div>
-      </div>
-      <div className="product-status"><span><CheckIcon size={12} /> Example based on synced books</span><span>No changes to Tally</span></div>
-    </div>
-    <div className="product-caption">A clearer view, from the books you already keep.</div>
-  </div>;
 }
 
 const examples = [

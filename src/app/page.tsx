@@ -1,6 +1,7 @@
 import { ArrowRightIcon, ArrowUpRightIcon, ArrowsClockwiseIcon, BankIcon, CalendarBlankIcon, ReceiptIcon, ChartBarIcon, ChatCircleDotsIcon, CheckIcon, CheckCircleIcon, CubeIcon, HandshakeIcon, LinkIcon, LockKeyIcon, MoneyIcon, PackageIcon, ShieldCheckIcon, TrendUpIcon, UsersIcon, WalletIcon } from "@phosphor-icons/react/dist/ssr";
-import { DemoRequest, MobileMenu, ProductPreview, QuestionDemo } from "@/components/interactive";
+import { DemoRequest, MobileMenu, QuestionDemo } from "@/components/interactive";
 import { PageMotion } from "@/components/page-motion";
+import { ProductPreview } from "@/components/product-preview";
 
 const faqs = [
   ["Do I need to know how to use Tally?", "No. TallyMate is built so you can see what is happening and ask questions in ordinary language. Your accounts team can keep working in TallyPrime as usual."],
