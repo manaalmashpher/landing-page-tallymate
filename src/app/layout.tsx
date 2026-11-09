@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Lora } from "next/font/google";
 import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "optional" });
+const lora = Lora({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tallymate-landing-page.vercel.app"),
+  metadataBase: new URL("https://landing-page-tallymate.vercel.app"),
   alternates: { canonical: "/" },
   title: "TallyMate | Your business. The whole picture.",
   description: "See what needs your attention in your TallyPrime books. Understand cash, customer payments, and unsold stock, then ask questions in plain language.",
@@ -22,5 +23,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={geist.variable}>{children}</body></html>;
+  return <html lang="en"><body className={`${geist.variable} ${lora.variable}`}>{children}</body></html>;
 }

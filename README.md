@@ -33,7 +33,7 @@ npm start
 
 ## Deployment
 
-Live assignment preview: https://tallymate-landing-page.vercel.app/
+Live assignment preview: https://landing-page-tallymate.vercel.app/
 
 Vercel is the selected host. Import https://github.com/manaalmashpher/landing-page-tallymate as a new Vercel project.
 
@@ -56,7 +56,7 @@ npx lighthouse http://127.0.0.1:3000 --preset=desktop --chrome-flags="--headless
 node scripts/summarize-lighthouse.mjs artifacts/mobile.report.json artifacts/desktop.report.json
 ```
 
-The assignment preview deliberately sends `noindex, nofollow` through metadata, which lowers the Lighthouse SEO score. Remove that only when turning this into an approved production marketing site. Metadata uses https://tallymate-landing-page.vercel.app/ as the canonical URL and base for social preview URLs. Update `src/app/layout.tsx` if the production domain changes.
+The assignment preview deliberately sends `noindex, nofollow` through metadata, which lowers the Lighthouse SEO score. Remove that only when turning this into an approved production marketing site. Metadata uses https://landing-page-tallymate.vercel.app/ as the canonical URL and base for social preview URLs. Update `src/app/layout.tsx` if the production domain changes.
 
 ## Files
 

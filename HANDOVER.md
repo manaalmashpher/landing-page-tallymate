@@ -33,12 +33,12 @@ Below-fold sections use content-visibility to defer layout. Only Tailwind's them
 
 ## Outstanding before submission / real launch
 
-- Live preview: https://tallymate-landing-page.vercel.app/ (homepage confirmed loading on 9 November 2026). Publish the latest local configuration and metadata changes through Vercel.
+- Live preview: https://landing-page-tallymate.vercel.app/ (updated after correcting the connected GitHub repository). Publish the latest local canonical metadata changes through Vercel.
 - Deployed Lighthouse performance target achieved on 9 November 2026: 99 mobile and 100 desktop. Report links and conditions are recorded below.
 - Confirm the enquiry contact with the lead and replace email drafts with an approved scheduler or lead endpoint if requested.
 - Obtain an approved customer story if available; otherwise retain the explicit placeholder.
 - Confirm supported TallyPrime versions, access roles, processing location, retention/deletion terms, and final legal documents before stronger claims or onboarding.
-- Canonical and social preview metadata now use https://tallymate-landing-page.vercel.app/. Update `src/app/layout.tsx` if the production domain changes.
+- Canonical and social preview metadata now use https://landing-page-tallymate.vercel.app/. Update `src/app/layout.tsx` if the production domain changes.
 
 ## AI-tool disclosure
 
@@ -72,11 +72,11 @@ Audits used Lighthouse 13.6.0 with default simulated mobile throttling and the d
 
 Performance fixes were driven by failed audit runs: contrast corrections, deferred offscreen layout, leaner styling resets, optional font display, and a compact mobile product composition. Section navigation uses immediate scrolling to keep targets stable. Run fresh audits on the hosted URL and repeat the complete keyboard walkthrough before submission.
 
-The assignment preview is live at https://tallymate-landing-page.vercel.app/; the homepage was confirmed loading in a browser on 9 November 2026. Vercel configuration is prepared in `vercel.json`, with Node.js 22.x declared in `package.json`. The latest local configuration and canonical metadata changes still need to be published. A complete deployed interaction review remains pending.
+The assignment preview is live at https://landing-page-tallymate.vercel.app/; the domain was updated after correcting the connected GitHub repository. Vercel configuration is prepared in `vercel.json`, with Node.js 22.x declared in `package.json`. The latest local configuration and canonical metadata changes still need to be published. A complete deployed interaction review remains pending.
 
 ## Deployed Lighthouse results
 
-Google PageSpeed Insights audited the live Vercel URL on 9 November 2026 at 19:42 IST using Lighthouse 13.6.0. Mobile used an emulated Moto G Power with Slow 4G throttling; desktop used emulated Desktop with custom throttling. These are single initial-page-load lab measurements and may vary. PageSpeed Insights has no real-user field data for this site yet.
+Historical audit: these results and report links refer to the previous deployment, `https://tallymate-landing-page.vercel.app/`, not the newly connected production domain. Google PageSpeed Insights audited that URL on 9 November 2026 at 19:42 IST using Lighthouse 13.6.0. Mobile used an emulated Moto G Power with Slow 4G throttling; desktop used emulated Desktop with custom throttling. These are single initial-page-load lab measurements and may vary. PageSpeed Insights has no real-user field data for this site yet.
 
 | Check | Mobile | Desktop |
 | --- | --- | --- |
@@ -96,7 +96,7 @@ Raw Lighthouse HTML and JSON were not exported from PageSpeed Insights; the host
 
 ## User-run Lighthouse CLI reports
 
-Two further audits of the deployed URL were run on 9 November 2026 using Lighthouse 13.6.0 through the CLI, with simulated throttling. These are separate measurements from PageSpeed Insights.
+Two further audits of the previous deployment URL (`https://tallymate-landing-page.vercel.app/`) were run on 9 November 2026 using Lighthouse 13.6.0 through the CLI, with simulated throttling. These are separate measurements from PageSpeed Insights.
 
 | Check | Mobile (19:53 IST) | Desktop (19:56 IST) |
 | --- | --- | --- |

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRightIcon, ArrowUpRightIcon, ChartBarIcon, CheckIcon, ChatCircleDotsIcon, CircleNotchIcon, CubeIcon, ListIcon, SparkleIcon, WalletIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon, ArrowUpRightIcon, ChartBarIcon, CheckIcon, ChatCircleDotsIcon, CircleNotchIcon, CubeIcon, ListIcon, WalletIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -34,19 +34,19 @@ export function ProductPreview() {
           <span className="sidebar-bottom"><CheckIcon size={15} /> Read-only</span>
         </div>
         <div className="product-content" aria-live="polite" aria-atomic="true">
-          <div className="product-greeting"><span>Malabar Trading Co. <span className="fiction-label">Fictional</span></span><span className="product-date">October overview</span></div>
+          <div className="product-greeting"><span>Malabar Trading Co.</span><span className="product-date">October overview</span></div>
           <p className="product-title">{data.title}</p>
           <div className="product-metric"><span>{data.primary}</span><strong>{data.amount}</strong><small><ArrowUpRightIcon size={13} />{data.description}</small></div>
           <div className="product-small-metrics"><div><span>{data.metric}</span><strong>{data.value}</strong></div><div><span>{data.secondMetric}</span><strong>{data.secondValue}</strong></div></div>
-          <div className="product-chart"><div><span>{data.chart}</span><span className="chart-key">This week</span></div><div className="bar-chart" role="img" aria-label={`${data.chart}, illustrative seven-day comparison`}>
+          <div className="product-chart"><div><span>{data.chart}</span></div><div className="bar-chart" role="img" aria-label={`${data.chart}, illustrative seven-day comparison`}>
             {data.bars.map((height, i) => <div className="bar-column" key={i}><span className="chart-bar" style={{ height: `${height}%` }} /><span className="bar-day">{["M", "T", "W", "T", "F", "S", "S"][i]}</span></div>)}
           </div></div>
-          <div className="product-attention"><span className="attention-icon"><SparkleIcon size={16} weight="fill" /></span><div><strong>Worth your attention</strong><p>{data.insight}</p><a href="#questions">{data.action} <ArrowRightIcon size={12} /></a></div></div>
+          <div className="product-attention"><div><strong>Worth your attention</strong><p>{data.insight}</p><a href="#questions">{data.action} <ArrowRightIcon size={12} /></a></div></div>
         </div>
       </div>
       <div className="product-status"><span><CheckIcon size={12} /> Example based on synced books</span><span>No changes to Tally</span></div>
     </div>
-    <div className="product-caption"><span className="caption-rule" /> A clearer view, from the books you already keep.</div>
+    <div className="product-caption">A clearer view, from the books you already keep.</div>
   </div>;
 }
 
@@ -59,8 +59,8 @@ const examples = [
 export function QuestionDemo() {
   const [selected, setSelected] = useState(0);
   const example = examples[selected];
-  return <div className="question-demo"><div className="question-choices"><span className="question-label">What’s on your mind?</span><div role="group" aria-label="Choose an example question">{examples.map((item, index) => <button key={item.category} aria-pressed={selected === index} onClick={() => setSelected(index)}><span>{item.question}</span><ArrowUpRightIcon size={19} /></button>)}</div><p>Or ask in English, Hindi, Malayalam, Tamil, Hinglish, or Manglish.</p></div>
-    <div className="answer-window"><div className="answer-header"><span><ChatCircleDotsIcon size={19} /> Ask your books</span><span className="sample-label">Interactive example</span></div><div className="question-bubble">{example.question}</div><div className="demo-answer" aria-live="polite" aria-atomic="true"><span className="answer-mark"><SparkleIcon size={17} weight="fill" /> TallyMate</span><h3>{example.title}</h3><p>{example.intro}</p><div className="answer-table-wrap"><table><caption className="sr-only">{example.category}, fictional example data</caption><thead><tr>{example.headers.map(header => <th key={header} scope="col">{header}</th>)}</tr></thead><tbody>{example.rows.map(row => <tr key={row[0]}>{row.map((cell, i) => i === 0 ? <th key={cell} scope="row">{cell}</th> : <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></div><div className="answer-takeaway"><CheckIcon size={16} /><p>{example.takeaway}</p></div><span className="fiction-note">Fictional names and figures. This example does not query your books.</span></div></div>
+  return <div className="question-demo"><div className="question-choices"><div role="group" aria-label="Choose an example question">{examples.map((item, index) => <button key={item.category} aria-pressed={selected === index} onClick={() => setSelected(index)}><span>{item.question}</span><ArrowUpRightIcon size={19} /></button>)}</div><p>Or ask in English, Hindi, Malayalam, Tamil, Hinglish, or Manglish.</p></div>
+    <div className="answer-window"><div className="answer-header"><span><ChatCircleDotsIcon size={19} /> Ask your books</span><span className="sample-label">Interactive example</span></div><div className="question-bubble">{example.question}</div><div className="demo-answer" aria-live="polite" aria-atomic="true"><span className="answer-mark">TallyMate</span><h3>{example.title}</h3><p>{example.intro}</p><div className="answer-table-wrap"><table><caption className="sr-only">{example.category}, fictional example data</caption><thead><tr>{example.headers.map(header => <th key={header} scope="col">{header}</th>)}</tr></thead><tbody>{example.rows.map(row => <tr key={row[0]}>{row.map((cell, i) => i === 0 ? <th key={cell} scope="row">{cell}</th> : <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></div><div className="answer-takeaway"><CheckIcon size={16} /><p>{example.takeaway}</p></div><span className="fiction-note">Fictional names and figures. This example does not query your books.</span></div></div>
   </div>;
 }
 
