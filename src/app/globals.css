@@ -767,3 +767,11 @@ h1 { font-size: clamp(44px, 4.3vw, 62px); }
   .question-choices button { padding: 12px 14px; font-size: 12px; }
   .question-choices button[aria-pressed="true"] { padding-inline: 14px; }
 }
+
+/* Keep primary-action labels and arrows grouped at every breakpoint. */
+.button.button-primary,
+.hero-actions .button.button-primary,
+.header-actions .button.button-primary,
+.demo-form .button.button-primary { gap: 8px; }
+
+.sign-in { gap: 4px; }
