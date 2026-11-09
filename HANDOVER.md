@@ -18,17 +18,6 @@ Product previews are functioning React component illustrations with selectable v
 
 Below-fold sections use content-visibility to defer layout. Only Tailwind's theme and utility layers are imported; the page has explicit CSS resets. The self-hosted Geist font uses optional display to avoid a late font swap on slow connections.
 
-## Product sources reviewed on 9 November 2026
-
-- Assignment: https://itnetai-buildtest.netlify.app/#task1
-- Public product information: https://tallymate.live/
-- Public product connection explanation: https://tallymate.live/#how-heading
-- User-opened demo: dashboard, customer dues, stock, insights, and chat.
-- Privacy draft reviewed: https://tallymate.live/privacy
-
-The public homepage confirms read-only behaviour, checked figures, multilingual questions, a connector for PC/server TallyPrime, and an add-on for Tally Cloud Access. The cloud route sends a copy of the books; the page deliberately does not claim all data stays on the user's computer. Freshness depends on the connection and available books.
-
-The privacy page is explicitly marked as a draft with placeholders and facts to confirm. No draft legal interpretation, retention guarantee, security certification, or compliance assertion has been promoted into marketing copy.
 
 ## Assumptions and decisions
 
@@ -44,12 +33,12 @@ The privacy page is explicitly marked as a draft with placeholders and facts to 
 
 ## Outstanding before submission / real launch
 
-- Deploy on Vercel or Netlify and add the live URL to this document.
-- Measure deployed Lighthouse performance on mobile and desktop and retain reports; target 90+.
+- Live preview: https://tallymate-landing-page.vercel.app/ (homepage confirmed loading on 9 November 2026). Publish the latest local configuration and metadata changes through Vercel.
+- Deployed Lighthouse performance target achieved on 9 November 2026: 99 mobile and 100 desktop. Report links and conditions are recorded below.
 - Confirm the enquiry contact with the lead and replace email drafts with an approved scheduler or lead endpoint if requested.
 - Obtain an approved customer story if available; otherwise retain the explicit placeholder.
 - Confirm supported TallyPrime versions, access roles, processing location, retention/deletion terms, and final legal documents before stronger claims or onboarding.
-- Set canonical URL after hosting is known. MetadataBase already reads the deployment URL variables supplied by Netlify or Vercel, with a localhost fallback.
+- Canonical and social preview metadata now use https://tallymate-landing-page.vercel.app/. Update `src/app/layout.tsx` if the production domain changes.
 
 ## AI-tool disclosure
 
@@ -83,4 +72,46 @@ Audits used Lighthouse 13.6.0 with default simulated mobile throttling and the d
 
 Performance fixes were driven by failed audit runs: contrast corrections, deferred offscreen layout, leaner styling resets, optional font display, and a compact mobile product composition. Section navigation uses immediate scrolling to keep targets stable. Run fresh audits on the hosted URL and repeat the complete keyboard walkthrough before submission.
 
-Deployment remains pending. Netlify configuration is prepared; add the hosted URL and its verification results before submission.
+The assignment preview is live at https://tallymate-landing-page.vercel.app/; the homepage was confirmed loading in a browser on 9 November 2026. Vercel configuration is prepared in `vercel.json`, with Node.js 22.x declared in `package.json`. The latest local configuration and canonical metadata changes still need to be published. A complete deployed interaction review remains pending.
+
+## Deployed Lighthouse results
+
+Google PageSpeed Insights audited the live Vercel URL on 9 November 2026 at 19:42 IST using Lighthouse 13.6.0. Mobile used an emulated Moto G Power with Slow 4G throttling; desktop used emulated Desktop with custom throttling. These are single initial-page-load lab measurements and may vary. PageSpeed Insights has no real-user field data for this site yet.
+
+| Check | Mobile | Desktop |
+| --- | --- | --- |
+| Performance | 99 | 100 |
+| Accessibility | 100 | 100 |
+| Best Practices | 100 | 100 |
+| SEO | 60 | 60 |
+| First Contentful Paint | 0.9 s | 0.3 s |
+| Largest Contentful Paint | 0.9 s | 0.3 s |
+| Total Blocking Time | 30 ms | 60 ms |
+| Cumulative Layout Shift | 0 | 0 |
+| Speed Index | 3.6 s | 0.4 s |
+
+Reports: [mobile](https://pagespeed.web.dev/analysis/https-tallymate-landing-page-vercel-app/uml3lzq389?form_factor=mobile) and [desktop](https://pagespeed.web.dev/analysis/https-tallymate-landing-page-vercel-app/uml3lzq389?form_factor=desktop). SEO reports the expected indexing block from intentional `noindex` metadata. Remaining optimisation suggestions include unused JavaScript (55 KiB) and legacy JavaScript (14 KiB); mobile also reports an estimated 110 ms of render-blocking savings. The deployed performance requirement of 90+ is met on both form factors. Local scores were 92 mobile and 100 desktop, but the environments differ, so this is not a controlled before/after comparison.
+
+Raw Lighthouse HTML and JSON were not exported from PageSpeed Insights; the hosted report links above provide the audit results.
+
+## User-run Lighthouse CLI reports
+
+Two further audits of the deployed URL were run on 9 November 2026 using Lighthouse 13.6.0 through the CLI, with simulated throttling. These are separate measurements from PageSpeed Insights.
+
+| Check | Mobile (19:53 IST) | Desktop (19:56 IST) |
+| --- | --- | --- |
+| Performance | 77 | 100 |
+| Accessibility | 100 | 100 |
+| Best Practices | 100 | 100 |
+| SEO | 60 | 60 |
+| First Contentful Paint | 1.0 s | 0.4 s |
+| Largest Contentful Paint | 1.0 s | 0.5 s |
+| Total Blocking Time | 1,120 ms | 0 ms |
+| Cumulative Layout Shift | 0 | 0 |
+| Speed Index | 2.0 s | 0.6 s |
+
+Saved HTML reports: [mobile](./tallymate-landing-page.vercel.app_2026-11-09_19-53-51.report.html) and [desktop](./tallymate-landing-page.vercel.app_2026-11-09_19-56-45.report.html).
+
+Mobile emulated a Moto G Power at 412 × 823 CSS pixels, with 4× CPU slowdown and 150 ms simulated network RTT. Desktop used 1350 × 940 CSS pixels, no CPU slowdown, and 40 ms simulated network RTT. Both used an initial navigation with storage reset enabled.
+
+The mobile CLI result does not meet the 90+ performance target, despite the earlier PageSpeed Insights score of 99. Its main measured difference is higher Total Blocking Time (1,120 ms versus 30 ms). The cause has not been established; differences in the host environment and run conditions mean these scores should not be treated as a controlled regression comparison. Desktop still meets the target. SEO remains 60 because indexing is intentionally blocked. Retain both sets of results; investigate the mobile blocking time before claiming consistently reproducible 90+ mobile performance.

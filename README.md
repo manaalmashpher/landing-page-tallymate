@@ -4,7 +4,7 @@ ITNET AI Task 1: an owner-focused B2B landing page for TallyMate. Built with Nex
 
 ## Local development
 
-Use Node.js 22 LTS or newer supported by Next.js.
+Use Node.js 22.x to match the deployment runtime.
 
 ```sh
 npm ci
@@ -33,10 +33,18 @@ npm start
 
 ## Deployment
 
-Connect https://github.com/manaalmashpher/landing-page-tallymate to Vercel or Netlify.
+Live assignment preview: https://tallymate-landing-page.vercel.app/
 
-- **Vercel:** use the detected Next.js preset; build command `npm run build`.
-- **Netlify:** use the committed `netlify.toml`; Netlify's Next.js support handles the `.next` output. No environment variables are required.
+Vercel is the selected host. Import https://github.com/manaalmashpher/landing-page-tallymate as a new Vercel project.
+
+- Root directory: repository root (`./`).
+- Framework: Next.js, declared in `vercel.json`.
+- Build command: `npm run build`, declared in `vercel.json`.
+- Install command and output directory: leave at the framework defaults.
+- Node.js: 22.x, declared in `package.json`.
+- Environment variables: none required for this implementation.
+
+`vercel.json` also applies the security headers to Vercel responses. Next.js handles routing and build output automatically.
 
 After deployment, verify the URL, product links, mobile menu, question examples, FAQ, and email-draft route. Run Lighthouse against the deployed production URL on mobile and desktop; the assignment requires performance 90+. Local measurements do not establish deployed performance.
 
@@ -48,7 +56,7 @@ npx lighthouse http://127.0.0.1:3000 --preset=desktop --chrome-flags="--headless
 node scripts/summarize-lighthouse.mjs artifacts/mobile.report.json artifacts/desktop.report.json
 ```
 
-The assignment preview deliberately sends `noindex, nofollow` through metadata, which lowers the Lighthouse SEO score. Remove that only when turning this into an approved production marketing site. Metadata uses Netlify's `URL` or Vercel's `VERCEL_PROJECT_PRODUCTION_URL` when available, otherwise localhost. Set the canonical URL once deployment is known.
+The assignment preview deliberately sends `noindex, nofollow` through metadata, which lowers the Lighthouse SEO score. Remove that only when turning this into an approved production marketing site. Metadata uses https://tallymate-landing-page.vercel.app/ as the canonical URL and base for social preview URLs. Update `src/app/layout.tsx` if the production domain changes.
 
 ## Files
 

@@ -5,13 +5,15 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "optional" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")),
+  metadataBase: new URL("https://tallymate-landing-page.vercel.app"),
+  alternates: { canonical: "/" },
   title: "TallyMate | Your business. The whole picture.",
   description: "See what needs your attention in your TallyPrime books. Understand cash, customer payments, and unsold stock, then ask questions in plain language.",
   openGraph: {
     title: "Your business. The whole picture. | TallyMate",
     description: "Your Tally books, made clear. Business visibility for owners.",
     type: "website",
+    url: "/",
     locale: "en_IN",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
