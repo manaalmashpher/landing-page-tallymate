@@ -194,7 +194,7 @@ h1 span { color: var(--green); }
 .demo-answer { padding: 0 25px 23px; min-height: 347px; }
 .answer-mark { display: flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 550; color: #53743f; }
 .demo-answer h3 { font-size: 19px; margin-top: 13px; }
-.demo-answer > p { font-size: 12px; line-height: 1.8; margin-top: 9px; color: var(--muted); }
+.answer-transition > p { font-size: 12px; line-height: 1.8; margin-top: 9px; color: var(--muted); }
 .answer-table-wrap { margin-top: 21px; overflow-x: auto; }
 .answer-table-wrap table { width: 100%; border-collapse: collapse; font-size: 10px; text-align: left; }
 .answer-table-wrap thead th { font-weight: 500; color: #66755f; background: #f5f7f0; padding: 9px 10px; }
@@ -461,10 +461,10 @@ h1 span { color: var(--green); }
   .answer-header { padding: 16px; }
   .answer-header > span:first-child { font-size: 10px; gap: 6px; }
   .answer-header .sample-label { font-size: 7px; }
-  .question-bubble { font-size: 11px; margin: 20px 16px 20px 30px; padding: 12px 13px; }
+  .question-bubble { font-size: 11px; margin: 20px 16px 20px auto; max-width: calc(100% - 46px); padding: 12px 13px; }
   .demo-answer { padding-inline: 16px; min-height: 390px; }
   .demo-answer h3 { font-size: 18px; }
-  .demo-answer > p { font-size: 11px; }
+  .answer-transition > p { font-size: 11px; }
   .answer-table-wrap table { font-size: 9px; }
   .answer-table-wrap thead th, .answer-table-wrap tbody th, .answer-table-wrap td { padding: 10px 6px; }
   .answer-takeaway p { font-size: 10px; }
@@ -775,3 +775,80 @@ h1 { font-size: clamp(44px, 4.3vw, 62px); }
 .demo-form .button.button-primary { gap: 8px; }
 
 .sign-in { gap: 4px; }
+
+/* Mobile hero: lead with a decisive headline, then supporting copy and action.
+   Keep the desktop display typography and the existing brand palette intact. */
+@media (max-width: 600px) {
+  .hero { padding-top: 32px; }
+  .hero-copy .eyebrow { font-size: 12px; margin-bottom: 16px; }
+  .hero-copy h1 {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: clamp(32px, 10vw, 58px);
+    font-weight: 650;
+    line-height: 1.07;
+    letter-spacing: -.045em;
+  }
+  .hero-description { font-size: 14px; line-height: 1.65; margin-top: 20px; max-width: 34ch; }
+  .hero-actions { margin-top: 24px; gap: 22px; }
+  .hero-actions > .text-link { white-space: nowrap; }
+}
+@media (max-width: 359px) {
+  .hero-actions { gap: 14px; }
+  .hero-actions .button-primary { padding-inline: 14px; }
+}
+
+/* Motion follows the reading order. Native CSS + one IntersectionObserver keep
+   the existing server-rendered layout and avoid a new animation dependency. */
+.hero-line { display: inline-block; overflow: hidden; vertical-align: bottom; padding-block: .12em; margin-block: -.12em; }
+h1 .hero-line:first-child, h1 .hero-line:first-child > span { color: var(--ink); }
+.hero-line > span { display: inline-block; }
+
+@keyframes hero-line-enter {
+  from { opacity: 0; transform: translateY(105%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes content-enter {
+  from { opacity: 0; transform: translateY(var(--motion-distance, 24px)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes answer-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy .eyebrow { animation: content-enter .55s cubic-bezier(.16, 1, .3, 1) both; }
+  .hero-line > span { animation: hero-line-enter .85s cubic-bezier(.16, 1, .3, 1) .08s both; }
+  .hero-line:last-child > span { animation-delay: .19s; }
+  .hero-description { animation: content-enter .7s cubic-bezier(.16, 1, .3, 1) .26s both; }
+  .hero-actions { animation: content-enter .7s cubic-bezier(.16, 1, .3, 1) .34s both; }
+  .product-stage { animation: content-enter .9s cubic-bezier(.16, 1, .3, 1) .23s both; }
+
+  [data-motion="pending"] { opacity: 0; transform: translateY(var(--motion-distance, 24px)); }
+  [data-motion="visible"] { animation: content-enter .7s cubic-bezier(.16, 1, .3, 1) var(--reveal-delay, 0s) both; }
+  .picture-graphic, .insight-collections, .how-steps > li:nth-child(2), .trust-details > article:nth-child(2) { --reveal-delay: .08s; }
+  .insight-stock, .how-steps > li:nth-child(3), .trust-details > article:nth-child(3) { --reveal-delay: .16s; }
+  .trust-details > article:nth-child(4) { --reveal-delay: .24s; }
+  [data-motion]:focus-within { opacity: 1; transform: none; animation: none; }
+
+  .answer-transition, .product-view-transition { animation: answer-enter .35s cubic-bezier(.16, 1, .3, 1) both; }
+  .question-bubble { animation: answer-enter .3s cubic-bezier(.16, 1, .3, 1) both; }
+  .chart-bar { transform-origin: bottom; animation: chart-enter .65s cubic-bezier(.16, 1, .3, 1) both; }
+  .bar-column:nth-child(even) .chart-bar { animation-delay: .06s; }
+  .mobile-menu nav { animation: answer-enter .25s cubic-bezier(.16, 1, .3, 1) both; }
+  .faq-list details[open] > p { animation: answer-enter .25s ease-out both; }
+  .button > svg, .text-link > svg, .text-link .play-icon, .question-choices button > svg { transition: transform .25s cubic-bezier(.16, 1, .3, 1); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .button:hover > svg, .text-link:hover > svg, .question-choices button:hover > svg { transform: translate(2px, -2px); }
+    .text-link:hover .play-icon { transform: translateX(3px); }
+  }
+  @media (max-width: 767px) {
+    #main { --motion-distance: 14px; }
+    [data-motion="visible"] { animation-duration: .55s; animation-delay: 0s; }
+  }
+}
+@keyframes chart-enter {
+  from { transform: scaleY(.15); opacity: .4; }
+  to { transform: scaleY(1); opacity: 1; }
+}
