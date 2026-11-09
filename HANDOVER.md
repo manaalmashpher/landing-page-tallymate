@@ -34,7 +34,7 @@ Below-fold sections use content-visibility to defer layout. Only Tailwind's them
 ## Outstanding before submission / real launch
 
 - Live preview: https://landing-page-tallymate.vercel.app/. The current deployed URL was audited on 10 November 2026; reports are linked below.
-- Latest deployed Lighthouse performance: 97 mobile and 100 desktop on 10 November 2026. Report links, conditions, and remaining findings are recorded below.
+- Latest deployed mobile Lighthouse CLI performance: 96 at 02:10 IST on 10 November 2026. The latest recorded desktop result is 100 from the earlier 01:38 IST PageSpeed run, before the performance optimizations. Conditions and remaining findings are recorded below.
 - Confirm the enquiry contact with the lead and replace email drafts with an approved scheduler or lead endpoint if requested.
 - Obtain an approved customer story if available; otherwise retain the explicit placeholder.
 - Confirm supported TallyPrime versions, access roles, processing location, retention/deletion terms, and final legal documents before stronger claims or onboarding.
@@ -76,6 +76,32 @@ The assignment preview is live at https://landing-page-tallymate.vercel.app/; th
 
 ## Deployed Lighthouse results
 
+### Latest mobile CLI audit (10 November 2026, 02:10 IST)
+
+The user ran Lighthouse CLI 13.6.0 against `https://landing-page-tallymate.vercel.app/` at 02:10:19 IST on 10 November 2026. This is the latest mobile measurement after the performance optimizations. It used the mobile preset with simulated throttling: 150 ms RTT, approximately 1,638 Kbps throughput, and 4x CPU slowdown.
+
+| Check | Latest mobile CLI |
+| --- | --- |
+| Performance | 96 |
+| Accessibility | 98 |
+| Best Practices | 100 |
+| SEO | 63 |
+| First Contentful Paint | 1.4 s |
+| Largest Contentful Paint | 1.4 s |
+| Total Blocking Time | 180 ms |
+| Cumulative Layout Shift | 0 |
+| Speed Index | 3.1 s |
+
+Source: local user-supplied `landing-page-tallymate.vercel.app_2026-11-10_02-10-19.report.html`. The raw HTML remains untracked and is not part of the repository; no hosted PageSpeed link exists for this CLI report.
+
+Compared with the preceding user-supplied mobile CLI report at 01:51 IST, Performance increased from 84 to 96, TBT decreased from 520 ms to 180 ms, and FCP/LCP decreased from 2.1 s to 1.4 s. CLS remained 0; Speed Index increased from 2.8 s to 3.1 s. This is a comparison of individual runs, not proof of a consistently reproducible gain or isolated causality. The latest run meets the 90+ mobile target.
+
+Implementation changes preserve the design: reveal initialization measures only nearby sections and batches geometry reads before animation writes; the existing Geist extended subset containing the rupee symbol is preloaded. CSS, colors, layouts, font families/weights, and animation timings were not changed. The production build, ESLint, TypeScript, and three reveal-controller regression tests passed.
+
+Remaining findings: skipped heading level in the hero preview, intentional indexing block, approximately 55 KiB of unused JavaScript, approximately 14 KiB of legacy JavaScript, render-blocking requests, and the network dependency tree. Forced reflow is no longer listed as a failing insight in this report; this does not establish that every layout cost has been eliminated. Desktop has not been re-audited after these optimizations; its latest recorded result is the earlier PageSpeed score of 100 below.
+
+### Earlier PageSpeed audit (10 November 2026, 01:38 IST)
+
 Google PageSpeed Insights audited the current deployment, `https://landing-page-tallymate.vercel.app/`, on 10 November 2026 at 01:38 IST using Lighthouse 13.6.0. Mobile used an emulated Moto G Power with Slow 4G throttling; desktop used emulated Desktop with custom throttling. These are single initial-page-load lab measurements and may vary. No real-user field data was available.
 
 | Check | Mobile | Desktop |
@@ -90,7 +116,7 @@ Google PageSpeed Insights audited the current deployment, `https://landing-page-
 | Cumulative Layout Shift | 0 | 0 |
 | Speed Index | 4.5 s | 0.5 s |
 
-Current reports: [mobile](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=mobile) and [desktop](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=desktop). These replace the previous deployment's PageSpeed report links.
+Earlier PageSpeed reports: [mobile](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=mobile) and [desktop](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=desktop). These superseded the previous deployment's PageSpeed links, but do not contain the later CLI results above.
 
 The 90+ performance target is met in both runs. SEO is reduced by intentional `noindex, nofollow` metadata. Accessibility flags a skipped heading level in the hero product preview: its H3 follows the page H1 without an intervening H2. Remaining performance suggestions include unused JavaScript (53 KiB mobile, 55 KiB desktop), legacy JavaScript (14 KiB), forced reflow, and one long main-thread task. Mobile reports an estimated 120 ms of render-blocking savings. Mobile Speed Index is 4.5 s despite a 0.9 s LCP; these metrics describe different aspects of rendering.
 

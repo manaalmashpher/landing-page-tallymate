@@ -62,18 +62,20 @@ The assignment preview deliberately sends `noindex, nofollow` through metadata, 
 
 ## Latest deployed Lighthouse audit
 
-Google PageSpeed Insights, Lighthouse 13.6.0, 10 November 2026 at 01:38 IST:
+Latest mobile audit: user-run Lighthouse CLI 13.6.0 against https://landing-page-tallymate.vercel.app/ on 10 November 2026 at 02:10 IST. Latest recorded desktop audit: PageSpeed Insights on 10 November 2026 at 01:38 IST, before the performance optimizations. These are separate runs, not a matched mobile/desktop audit pair.
 
-| Category | Mobile | Desktop |
+| Category | Mobile CLI (02:10 IST) | Earlier desktop PageSpeed (01:38 IST) |
 | --- | --- | --- |
-| Performance | 97 | 100 |
+| Performance | 96 | 100 |
 | Accessibility | 98 | 98 |
 | Best Practices | 100 | 100 |
 | SEO | 63 | 63 |
 
-Reports: [mobile](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=mobile) and [desktop](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=desktop).
+Latest mobile metrics: FCP 1.4 s, LCP 1.4 s, Total Blocking Time 180 ms, CLS 0, and Speed Index 3.1 s. The preceding user-supplied mobile CLI run scored 84 with 520 ms TBT and 2.1 s LCP. The latest run meets the 90+ target; repeat runs are needed to establish reproducibility.
 
-Both runs meet the 90+ performance target. Accessibility flags a skipped heading level in the hero preview. SEO is reduced by intentional `noindex, nofollow`. These are single-run lab results; no real-user field data was available. See `HANDOVER.md` for metrics, findings, and historical measurements.
+The mobile HTML report is available locally as `landing-page-tallymate.vercel.app_2026-11-10_02-10-19.report.html` and is not committed. Earlier hosted PageSpeed reports: [mobile](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=mobile) and [desktop](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=desktop). Those links do not contain the latest CLI run.
+
+Accessibility still flags a skipped heading level in the hero preview. SEO is reduced by intentional `noindex, nofollow`. These are single-run lab measurements, not real-user field data. See `HANDOVER.md` for conditions, remaining findings, and historical measurements.
 
 ## Files
 
