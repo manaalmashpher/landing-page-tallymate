@@ -78,6 +78,25 @@ Preview: https://landing-page-tallymate.vercel.app/
 
 Vercel uses `vercel.json` for the Next.js build and security headers. Node.js 22.x is declared in `package.json`; no environment variables are required. See README for setup and audit commands.
 
+## Latest Lighthouse metrics
+
+Lighthouse 13.6.0 audited the deployed assignment page on mobile and desktop, using simulated throttling.
+
+| Metric | Mobile | Desktop |
+| --- | --- | --- |
+| Performance | 93 | 100 |
+| Accessibility | 99 | 99 |
+| Best Practices | 100 | 100 |
+| SEO | 63 | 63 |
+| Agentic Browsing | 100 | 100 |
+| First Contentful Paint | 1.7 s | 0.5 s |
+| Largest Contentful Paint | 1.7 s | 0.5 s |
+| Total Blocking Time | 270 ms | 20 ms |
+| Cumulative Layout Shift | 0 | 0 |
+| Speed Index | 2.5 s | 0.8 s |
+
+Both runs meet the assignment's Performance 90+ target. SEO is affected by the intentional noindex setting. These are individual lab measurements, not real-user field data or a guarantee of identical repeat results. Raw reports are excluded from version control.
+
 ## AI-tool disclosure
 
 Codex assisted with planning, drafting and revising copy, visual design, Next.js/React implementation, documentation, and verification. Product examples and charts are fictional. No real customer testimonials, confidential business records, or private screenshots were generated or published.

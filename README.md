@@ -69,6 +69,25 @@ node scripts/summarize-lighthouse.mjs artifacts/mobile.report.json artifacts/des
 
 The assignment preview deliberately uses `noindex, nofollow`, which affects Lighthouse SEO. Remove this only for an approved public marketing launch. Metadata uses the assignment preview domain for canonical and social URLs; update `src/app/layout.tsx` if the domain changes. Browser/social titles and the generated share image retain the tagline “Your business. The whole picture.”
 
+## Latest Lighthouse metrics
+
+Lighthouse 13.6.0 audited the deployed assignment page on mobile and desktop, using simulated throttling.
+
+| Metric | Mobile | Desktop |
+| --- | --- | --- |
+| Performance | 93 | 100 |
+| Accessibility | 99 | 99 |
+| Best Practices | 100 | 100 |
+| SEO | 63 | 63 |
+| Agentic Browsing | 100 | 100 |
+| First Contentful Paint | 1.7 s | 0.5 s |
+| Largest Contentful Paint | 1.7 s | 0.5 s |
+| Total Blocking Time | 270 ms | 20 ms |
+| Cumulative Layout Shift | 0 | 0 |
+| Speed Index | 2.5 s | 0.8 s |
+
+Both runs meet the assignment's Performance 90+ target. SEO is affected by the intentional noindex setting. These are individual lab measurements, not real-user field data or a guarantee of identical repeat results. Raw reports are excluded from version control.
+
 ## Files
 
 - `src/app/page.tsx`: sections and server-rendered copy.
