@@ -10,7 +10,6 @@ export function PageMotion() {
 
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const targets = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]"));
-    const revealed = new Set<HTMLElement>();
     const sections = new Map<Element, HTMLElement[]>();
     targets.forEach(target => {
       const section = target.closest("section") ?? target;
@@ -22,9 +21,7 @@ export function PageMotion() {
     let sectionObserver: IntersectionObserver | undefined;
 
     function show(target: HTMLElement) {
-      revealed.add(target);
       target.dataset.motion = "visible";
-      observer?.unobserve(target);
     }
 
     function configure() {
@@ -35,7 +32,9 @@ export function PageMotion() {
 
       observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) show(entry.target as HTMLElement);
+          const target = entry.target as HTMLElement;
+          if (entry.isIntersecting) show(target);
+          else if (!target.contains(document.activeElement)) target.dataset.motion = "pending";
         });
       }, { rootMargin: "0px 0px -32px 0px", threshold: 0 });
 
@@ -47,7 +46,6 @@ export function PageMotion() {
           if (!entry.isIntersecting) return;
           sectionObserver?.unobserve(entry.target);
           (sections.get(entry.target) ?? []).forEach(target => {
-            if (revealed.has(target)) return;
             measurements.push({
               target,
               keepVisible: target.contains(document.activeElement) || target.getBoundingClientRect().bottom <= 0,
@@ -57,16 +55,14 @@ export function PageMotion() {
         // Complete every geometry read before changing any animation styles.
         measurements.forEach(({ target, keepVisible }) => {
           if (keepVisible) {
-            revealed.add(target);
+            observer?.observe(target);
           } else {
             target.dataset.motion = "pending";
             observer?.observe(target);
           }
         });
       }, { rootMargin: "300px 0px 300px 0px", threshold: 0 });
-      sections.forEach((members, section) => {
-        if (members.some(target => !revealed.has(target))) sectionObserver?.observe(section);
-      });
+      sections.forEach((_, section) => sectionObserver?.observe(section));
     }
 
     function revealFocused(event: FocusEvent) {

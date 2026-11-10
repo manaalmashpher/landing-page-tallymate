@@ -31,7 +31,6 @@ const viewOrder = Object.keys(views) as View[];
 export function ProductPreview() {
   const [view, setView] = useState<View>("sales");
   const [autoPlay, setAutoPlay] = useState(true);
-  const data = views[view];
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -75,7 +74,9 @@ export function ProductPreview() {
         <a href="#questions" onClick={() => setAutoPlay(false)}><ChatCircleDotsIcon size={16} /><span>Ask your books</span></a>
       </div>
       <div className="books-content" aria-live={autoPlay ? "off" : "polite"} aria-atomic="true">
-        <div key={view} className="product-view-transition">
+        {viewOrder.map(key => {
+          const data = views[key];
+          return <div key={key} className={view === key ? "product-view-transition" : undefined} aria-hidden={view !== key} inert={view !== key}>
           <div className="books-summary">
             <div><span className="books-period">This month so far</span><h3>{data.title}</h3></div>
             <div className="books-total"><strong>{data.total}</strong><span>{data.totalNote}</span></div>
@@ -91,7 +92,8 @@ export function ProductPreview() {
             {data.attention.map(item => <div key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}
             <a href="#questions">Ask about your books <ArrowRightIcon size={12} /></a>
           </div>
-        </div>
+        </div>;
+        })}
       </div>
       <div className="product-status"><span><CheckIcon size={12} /> Fictional figures</span><span>Read-only. No changes to Tally.</span></div>
     </div>

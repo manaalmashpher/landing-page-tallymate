@@ -72,7 +72,7 @@ test("offscreen sections do not cause eager layout; nearby reads precede all wri
   assert.equal(app.targets[2].dataset.motion, undefined);
   app.observers[0].enter(app.targets[0]);
   assert.equal(app.targets[0].dataset.motion, "visible");
-  assert.equal(app.observers[0].observed.has(app.targets[0]), false);
+  assert.equal(app.observers[0].observed.has(app.targets[0]), true);
   app.cleanup();
   assert.ok(app.observers.every(observer => observer.disconnected));
   assert.equal(app.listeners.size, 0);
@@ -100,5 +100,23 @@ test("keyboard focus keeps content visible before and after observer initializat
   assert.equal(app.targets[1].dataset.motion, "pending");
   app.listeners.get("focusin")({ target: app.targets[1] });
   assert.equal(app.targets[1].dataset.motion, "visible");
+  app.cleanup();
+});
+
+test("all reveal targets stay observed and reset after leaving the viewport", () => {
+  const app = mount();
+  const target = app.targets[0];
+  app.observers[1].enter(app.sections[0]);
+  app.observers[0].enter(target);
+  assert.equal(target.dataset.motion, "visible");
+  app.document.activeElement = target;
+  app.observers[0].callback([{ target, isIntersecting: false }]);
+  assert.equal(target.dataset.motion, "visible");
+  assert.ok(app.observers[0].observed.has(target));
+  app.document.activeElement = null;
+  app.observers[0].callback([{ target, isIntersecting: false }]);
+  assert.equal(target.dataset.motion, "pending");
+  app.observers[0].enter(target);
+  assert.equal(target.dataset.motion, "visible");
   app.cleanup();
 });

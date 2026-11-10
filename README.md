@@ -1,6 +1,8 @@
 # TallyMate landing page
 
-ITNET AI Task 1: an owner-focused B2B landing page for TallyMate. Built with Next.js App Router, React, TypeScript, Tailwind CSS, and Phosphor icons.
+An owner-focused B2B landing page for TallyMate, built for ITNET AI Task 1 with Next.js App Router, React, TypeScript, Tailwind CSS v4, and Phosphor icons.
+
+Assignment brief: https://itnetai-buildtest.netlify.app/#task1. Product reference: https://tallymate.live/. See `HANDOVER.md` for the required deliverables, audience, section rationale, visual direction, assumptions, unfinished items, confidentiality handling, and AI-tool disclosure. Figma is not applicable because the page was designed in code.
 
 ## Local development
 
@@ -11,44 +13,51 @@ npm ci
 npm run dev
 ```
 
-Open the Local URL printed by Next.js, normally http://127.0.0.1:3000.
+Open the local URL printed by Next.js, normally http://127.0.0.1:3000.
 
 ```sh
 npm run lint
 npm run typecheck
+node --test tests/page-motion.test.mjs
 npm run build
 npm start
 ```
 
-`npm start` serves the production build. The build uses `next/font` to download and self-host Geist and Lora; the first build needs access to Google's font service. Browser requests do not fetch the font from Google.
+`npm start` serves the production build. The build uses `next/font` to download and self-host Geist and Lora; the first build needs access to Google's font service. Browser requests do not fetch fonts from Google.
 
 ## Page behaviour
 
-- Interactive hero: Sales, Cash & bank, and Stock views use fictional data, with the same content on mobile and desktop. Ask your books scrolls to the example questions on both.
-- Preview views cycle every five seconds until a tab is selected or focused. Reduced motion disables cycling; hidden browser tabs pause it.
-- Lora hero headings use the same 650 weight on mobile and desktop. Hero entrances, scroll reveals, preview transitions, and a subtle green-to-amber background respect reduced motion.
+- Hero headline: “Ask your books. Get clear answers.” Both lines use Lora at weight 650, without italics, at matching sizes. Container-relative sizing keeps the text within its column on desktop and mobile. Desktop grid columns protect the dashboard width.
+- Interactive hero: Sales, Cash & bank, and Stock show fictional metrics and attention panels on mobile and desktop. Ask your books scrolls to the example questions.
+- Preview views cycle every five seconds until a tab is selected or focused. Reduced motion disables cycling; hidden browser tabs pause it. Panels reserve the tallest view's height to prevent page shifts when switching.
+- The problem illustration drops its four cards in a staggered sequence over 0.72 seconds whenever it re-enters view. Section reveals also replay whenever they re-enter view.
+- Hero entrances, scroll reveals, preview transitions, and the subtle green-to-amber background respect reduced motion.
+- Section links scroll immediately, using offsets matched to the sticky header so the preceding divider stays beneath it.
 - Three selectable example questions update an accessible answer region.
-- Native details/summary FAQ works without JavaScript.
-- Mobile navigation supports Escape to close.
-- Demo enquiry validates name and company, then prepares a mailto link. The visitor must open, review, and send the draft themselves. There is no server-side lead collection or simulated submission success.
+- Three clearly labelled placeholder reviews scroll horizontally in a continuous 28-second loop. Hover or keyboard focus pauses the animation; reduced motion disables autoplay and allows manual scrolling. Soft fades blend both edges into the page, with no divider below the carousel and a tighter gap to the sales section.
+- Native details/summary FAQs work without JavaScript. Mobile navigation supports Escape to close.
+- Demo enquiry validates name and company, then prepares a mailto link. The visitor opens, reviews, and sends the draft. There is no server-side lead collection or automatic email submission.
 - External product and sign-in links point to the real TallyMate service.
+- Primary buttons are amber; the header wordmark retains its green styling. Footer attribution reads “Made by Manaal Mashpher”, styled to match adjacent navigation links.
 
 ## Deployment
 
-Live assignment preview: https://landing-page-tallymate.vercel.app/
+Assignment preview: https://landing-page-tallymate.vercel.app/
 
-Vercel is the selected host. Import https://github.com/manaalmashpher/landing-page-tallymate as a new Vercel project.
+Repository: https://github.com/manaalmashpher/landing-page-tallymate
+
+Vercel configuration:
 
 - Root directory: repository root (`./`).
 - Framework: Next.js, declared in `vercel.json`.
 - Build command: `npm run build`, declared in `vercel.json`.
-- Install command and output directory: leave at the framework defaults.
+- Install command and output directory: framework defaults.
 - Node.js: 22.x, declared in `package.json`.
-- Environment variables: none required for this implementation.
+- Environment variables: none required.
 
-`vercel.json` also applies the security headers to Vercel responses. Next.js handles routing and build output automatically.
+`vercel.json` applies security headers. Next.js handles routing and build output.
 
-After deployment, verify the URL, product links, mobile menu, question examples, FAQ, and email-draft route. Run Lighthouse against the deployed production URL on mobile and desktop; the assignment requires performance 90+. Local measurements do not establish deployed performance.
+After deployment, verify section navigation, responsive hero sizing, preview switching, card replay, mobile menu, example questions, FAQ, and email drafts. Run Lighthouse against the deployed URL on mobile and desktop; the assignment requires Performance 90+.
 
 Example audit commands (create `artifacts` first):
 
@@ -58,38 +67,25 @@ npx lighthouse https://landing-page-tallymate.vercel.app/ --preset=desktop --chr
 node scripts/summarize-lighthouse.mjs artifacts/mobile.report.json artifacts/desktop.report.json
 ```
 
-The assignment preview deliberately sends `noindex, nofollow` through metadata, which lowers the Lighthouse SEO score. Remove that only when turning this into an approved production marketing site. Metadata uses https://landing-page-tallymate.vercel.app/ as the canonical URL and base for social preview URLs. Update `src/app/layout.tsx` if the production domain changes.
-
-## Latest deployed Lighthouse audit
-
-Latest mobile audit: user-run Lighthouse CLI 13.6.0 against https://landing-page-tallymate.vercel.app/ on 10 November 2026 at 02:10 IST. Latest recorded desktop audit: PageSpeed Insights on 10 November 2026 at 01:38 IST, before the performance optimizations. These are separate runs, not a matched mobile/desktop audit pair.
-
-| Category | Mobile CLI (02:10 IST) | Earlier desktop PageSpeed (01:38 IST) |
-| --- | --- | --- |
-| Performance | 96 | 100 |
-| Accessibility | 98 | 98 |
-| Best Practices | 100 | 100 |
-| SEO | 63 | 63 |
-
-Latest mobile metrics: FCP 1.4 s, LCP 1.4 s, Total Blocking Time 180 ms, CLS 0, and Speed Index 3.1 s. The preceding user-supplied mobile CLI run scored 84 with 520 ms TBT and 2.1 s LCP. The latest run meets the 90+ target; repeat runs are needed to establish reproducibility.
-
-The mobile HTML report is available locally as `landing-page-tallymate.vercel.app_2026-11-10_02-10-19.report.html` and is not committed. Earlier hosted PageSpeed reports: [mobile](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=mobile) and [desktop](https://pagespeed.web.dev/analysis/https-landing-page-tallymate-vercel-app/tash26sc5o?form_factor=desktop). Those links do not contain the latest CLI run.
-
-Accessibility still flags a skipped heading level in the hero preview. SEO is reduced by intentional `noindex, nofollow`. These are single-run lab measurements, not real-user field data. See `HANDOVER.md` for conditions, remaining findings, and historical measurements.
+The assignment preview deliberately uses `noindex, nofollow`, which affects Lighthouse SEO. Remove this only for an approved public marketing launch. Metadata uses the assignment preview domain for canonical and social URLs; update `src/app/layout.tsx` if the domain changes. Browser/social titles and the generated share image retain the tagline “Your business. The whole picture.”
 
 ## Files
 
-- `src/app/page.tsx`: page sections and server-rendered content.
+- `src/app/page.tsx`: sections and server-rendered copy.
 - `src/components/interactive.tsx`: example questions, mobile menu, and demo enquiry.
-- `src/components/product-preview.tsx`: consistent mobile/desktop hero views and automatic cycling with manual override.
-- `src/components/page-motion.tsx`: progressive scroll reveals and reduced-motion handling.
-- `src/app/globals.css`: responsive design system and styles; Tailwind v4 is available.
-- `src/app/layout.tsx`: fonts and page metadata.
+- `src/components/product-preview.tsx`: stable-height hero views and automatic cycling with manual override.
+- `src/components/review-carousel.tsx`: three placeholder reviews and a duplicate set hidden from assistive technology for the continuous scrolling loop.
+- `src/components/page-motion.tsx`: progressive reveals, replaying illustration, and reduced-motion handling.
+- `src/app/globals.css`: responsive design and styles.
+- `src/app/layout.tsx`: fonts and metadata.
 - `src/app/opengraph-image.tsx`: generated share image.
-- `HANDOVER.md`: design rationale, assumptions, sources, limitations, and AI disclosure.
+- `tests/page-motion.test.mjs`: reveal-controller regression tests, including replay on viewport re-entry.
+- `HANDOVER.md`: rationale, assumptions, limitations, and AI disclosure.
 
-## Data and assets
+## Data, assets, and repository hygiene
 
-No confidential assignment screenshots or real business records are included. All example names, figures, and charts were authored as fictional illustrations. No customer endorsement is claimed. The customer-story slot is visibly marked as a placeholder.
+All example names, figures, and charts are fictional illustrations. No customer endorsement is claimed. The reviews carousel contains three clearly marked placeholders, scrolling automatically in a continuous loop; hover or keyboard focus pauses it, and reduced motion provides manual scrolling. No confidential assignment screenshots or real business records are included.
 
-The lowercase typographic wordmark is an assignment design treatment, not a replacement official brand asset. Icons are from Phosphor. Geist and Lora are distributed through `next/font`.
+The lowercase typographic wordmark is an assignment treatment, not an official replacement brand asset. Icons are from Phosphor; fonts are provided through `next/font`.
+
+Generated Lighthouse HTML reports (`*.report.html`) and `artifacts/` are ignored by Git.
