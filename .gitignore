@@ -11,3 +11,4 @@ next-env.d.ts
 artifacts/
 IMPLEMENTATION_PLAN.md
 *.log
+*.report.html
