@@ -67,7 +67,7 @@ npx lighthouse https://landing-page-tallymate.vercel.app/ --preset=desktop --chr
 node scripts/summarize-lighthouse.mjs artifacts/mobile.report.json artifacts/desktop.report.json
 ```
 
-The assignment preview deliberately uses `noindex, nofollow`, which affects Lighthouse SEO. Remove this only for an approved public marketing launch. Metadata uses the assignment preview domain for canonical and social URLs; update `src/app/layout.tsx` if the domain changes. Browser/social titles and the generated share image retain the tagline “Your business. The whole picture.”
+The assignment preview deliberately uses `noindex, nofollow`, which affects Lighthouse SEO. Remove this only for an approved public marketing launch. Metadata uses the assignment preview domain for canonical and social URLs; update `src/app/layout.tsx` if the domain changes. Browser/social titles and the generated share image use the tagline “Ask your books. Get clear answers.”
 
 ## Latest Lighthouse metrics
 

@@ -10,10 +10,10 @@ const lora = Lora({ subsets: ["latin"], style: ["normal", "italic"], variable: "
 export const metadata: Metadata = {
   metadataBase: new URL("https://landing-page-tallymate.vercel.app"),
   alternates: { canonical: "/" },
-  title: "TallyMate | Your business. The whole picture.",
+  title: "TallyMate | Ask your books. Get clear answers.",
   description: "See what needs your attention in your TallyPrime books. Understand cash, customer payments, and unsold stock, then ask questions in plain language.",
   openGraph: {
-    title: "Your business. The whole picture. | TallyMate",
+    title: "Ask your books. Get clear answers. | TallyMate",
     description: "Your Tally books, made clear. Business visibility for owners.",
     type: "website",
     url: "/",
